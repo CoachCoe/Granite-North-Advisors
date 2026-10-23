@@ -1,0 +1,102 @@
+---
+import { principals } from '../site.config';
+
+const [john] = principals;
+---
+<section id="top" class="container hero" aria-labelledby="hero-title">
+  <p class="pill">No cost if your practice has Rural Health Transformation money</p>
+  <h1 id="hero-title">Your notes shouldn't come home with you.</h1>
+  <p class="intro">We help small practices and rural hospitals in New Hampshire fix their tech, get paid for the work they already do, and stay safe from hackers. If you got Rural Health Transformation funding, it's free.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="#request">How to get started</a>
+    <a class="btn btn-secondary" href={`mailto:${john.email}`}>Just talk to us</a>
+  </div>
+  <p class="note">No IT department? That's most places we work. We'll figure it out with whoever's been handling it, even if that's you.</p>
+</section>
+
+<style>
+  .hero {
+    padding-top: var(--section-pad);
+    padding-bottom: 72px;
+  }
+
+  .pill {
+    margin: 0 0 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-pill-border);
+    border-radius: 999px;
+    padding: 6px 16px;
+    background: var(--color-surface);
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--text-h1);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    max-width: 920px;
+  }
+
+  .intro {
+    margin: 28px 0 0;
+    max-width: 720px;
+    font-size: var(--text-lead);
+    color: var(--color-body);
+  }
+
+  .actions {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 28px;
+    border-radius: var(--radius-button);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: #FFFFFF;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-accent-hover);
+    color: #FFFFFF;
+  }
+
+  .btn-secondary {
+    border: 1.5px solid var(--color-ink);
+    color: var(--color-ink);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
+  .note {
+    margin: 24px 0 0;
+    font-size: var(--text-small);
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 480px) {
+    .pill { border-radius: 20px; }
+  }
+</style>

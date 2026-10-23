@@ -1,0 +1,73 @@
+---
+import Headshot from './Headshot.astro';
+
+const bios = [
+  {
+    name: 'John Clemente',
+    slug: 'john-clemente',
+    bio: "John has spent the last decade on the money side of care delivery and on clinical AI, including leading analytics at one of the country's largest health plans. He has a master's in Health Care Delivery Science from Dartmouth.",
+  },
+  {
+    name: 'Shawn Coe',
+    slug: 'shawn-coe',
+    bio: 'Shawn has spent 25 years building software and leading engineering and security teams. He holds two U.S. patents in applied AI, one of them in cybersecurity.',
+  },
+];
+---
+<section id="team" class="container section-pad" aria-labelledby="team-title">
+  <p class="eyebrow">Who we are</p>
+  <h2 id="team-title" class="h2">Two of us. That's the whole firm.</h2>
+  <p class="lede">We've worked together since 2019, and we've built and run the same kinds of systems we'll be helping you with. When you call, you get one of us, not somebody we hired last week.</p>
+  <div class="grid">
+    {bios.map((person) => (
+      <article class="card">
+        <Headshot name={person.name} slug={person.slug} />
+        <h3>{person.name}</h3>
+        <p class="role">Principal</p>
+        <p class="bio">{person.bio}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .h2 { margin-bottom: 16px; }
+
+  .lede {
+    margin-bottom: 40px;
+    max-width: 700px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 24px;
+  }
+
+  .card { background: var(--color-surface); }
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .role {
+    margin: 4px 0 16px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .bio {
+    margin: 0;
+    color: var(--color-body);
+  }
+
+  @media (max-width: 400px) {
+    .card { padding: 24px; }
+  }
+</style>

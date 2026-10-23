@@ -1,0 +1,87 @@
+---
+import { company, principals } from '../site.config';
+---
+<footer class="site-footer on-dark">
+  <div class="container columns">
+    <div class="col-company">
+      <p class="company">{company.legalName}</p>
+      <address>{company.street}<br />{company.city}, {company.region} {company.postalCode}</address>
+    </div>
+    {principals.map((p) => (
+      <div class="col-person">
+        <p class="person">{p.name}, {p.title}</p>
+        <p class="contact">
+          <a href={`mailto:${p.email}`}>{p.email}</a><br />
+          <a href={`tel:${p.phone}`}>{p.phoneDisplay}</a>
+        </p>
+      </div>
+    ))}
+  </div>
+  <div class="container legal">© 2026 {company.legalName} · Independent healthcare consulting in New Hampshire</div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-dark);
+    color: var(--color-on-dark);
+  }
+
+  .columns {
+    padding-top: 72px;
+    padding-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 64px;
+  }
+
+  .col-company {
+    flex: 1 1 280px;
+    min-width: 0;
+  }
+
+  .col-person {
+    flex: 1 1 240px;
+    min-width: 0;
+  }
+
+  .company {
+    margin: 0 0 8px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 22px;
+    color: #FFFFFF;
+  }
+
+  address {
+    font-style: normal;
+    color: var(--color-on-dark-body);
+  }
+
+  .person {
+    margin: 0 0 4px;
+    font-weight: 600;
+    color: #FFFFFF;
+  }
+
+  .contact {
+    margin: 0;
+    color: var(--color-on-dark-body);
+  }
+
+  .contact a {
+    display: inline-block;
+    padding: 8px 0;
+    color: var(--color-on-dark-accent);
+    overflow-wrap: anywhere;
+  }
+
+  .contact a:hover { color: #FFFFFF; }
+
+  .legal {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-top: 1px solid var(--color-dark-border);
+    font-size: var(--text-eyebrow);
+    color: var(--color-on-dark-muted);
+  }
+</style>

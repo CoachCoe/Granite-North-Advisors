@@ -1,0 +1,86 @@
+---
+import MountainMark from './MountainMark.astro';
+import { company } from '../site.config';
+
+const links = [
+  { href: '#services', label: 'What we do' },
+  { href: '#approach', label: 'How we work' },
+  { href: '#team', label: 'Who we are' },
+  { href: '#request', label: 'Get started' },
+];
+---
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="#top">
+      <span class="mark"><MountainMark /></span>
+      <span class="wordmark">{company.name}</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        {links.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-ground);
+  }
+
+  .bar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .mark { color: var(--color-accent); flex: none; }
+
+  .wordmark {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 28px;
+    font-size: var(--text-small);
+    font-weight: 600;
+  }
+
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  nav a:hover { color: var(--color-accent); }
+
+  @media (max-width: 480px) {
+    ul { gap: 0 20px; }
+  }
+</style>

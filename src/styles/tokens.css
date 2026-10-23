@@ -1,0 +1,40 @@
+:root {
+  --color-ground: #F4F5F2;
+  --color-surface: #FFFFFF;
+  --color-ink: #16201C;
+  --color-body: #3E4944;
+  --color-muted: #4A5550;
+  --color-border: #D9DDD8;
+  --color-pill-border: #C5D6CF;
+  --color-placeholder: #E3E8E4;
+  --color-placeholder-border: #9AA6A0;
+
+  --color-accent: #1F5C4A;
+  --color-accent-hover: #123B2F;
+
+  --color-dark: #16201C;
+  --color-dark-card: #1D2924;
+  --color-dark-border: #34413B;
+  --color-on-dark: #E8ECE9;
+  --color-on-dark-body: #C3CCC7;
+  --color-on-dark-muted: #A9B3AE;
+  --color-on-dark-accent: #8FC7B0;
+
+  --font-heading: Archivo, 'Archivo Fallback', sans-serif;
+  --font-body: 'Source Sans 3', 'Source Sans 3 Fallback', system-ui, sans-serif;
+
+  --text-body: 18px;
+  --text-lead: 21px;
+  --text-list: 17px;
+  --text-small: 16px;
+  --text-eyebrow: 14px;
+  --text-h1: clamp(40px, 6vw, 72px);
+  --text-h2: clamp(30px, 4vw, 44px);
+  --line-body: 1.6;
+
+  --content-max: 1160px;
+  --gutter: 24px;
+  --section-pad: 88px;
+  --radius-card: 12px;
+  --radius-button: 8px;
+}

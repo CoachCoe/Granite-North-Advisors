@@ -1,0 +1,102 @@
+---
+const outcomes = [
+  'A short plan, 10–15 pages, with a name next to every job',
+  'Laminated "first hour" checklists to keep by the phone',
+  'A simple guide to who you have to notify, and by when',
+  'A downtime kit so you can keep seeing patients on paper',
+  'A short write-up within a week, and a 90-day to-do list with owners',
+];
+---
+<section class="example on-dark" aria-labelledby="example-title">
+  <div class="container section-pad layout">
+    <div class="story">
+      <p class="eyebrow">An example</p>
+      <h2 id="example-title" class="h2">Say the computers go down Monday morning. Then what?</h2>
+      <p>Most practices have a plan in a binder somewhere. Hardly anybody has practiced it. We write you a short one with a name next to every job, and a backup for when that person's out. Then we sit down with your team for an hour and a half and walk through it like it's really happening.</p>
+      <p>At every step we ask the same four things. Who makes the call? Who does what? Who tells staff and patients? And what are your patients going through right now?</p>
+    </div>
+    <div class="card">
+      <h3>What you end up with</h3>
+      <ul>
+        {outcomes.map((item) => (
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5 L10 17 L19 7" /></svg>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .example {
+    background: var(--color-dark);
+    color: var(--color-on-dark);
+  }
+
+  .layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+
+  .story {
+    flex: 1 1 360px;
+    min-width: 0;
+  }
+
+  .eyebrow { color: var(--color-on-dark-accent); }
+
+  .h2 {
+    margin-bottom: 20px;
+    color: #FFFFFF;
+  }
+
+  .story p:not(.eyebrow) {
+    margin: 0 0 16px;
+    color: var(--color-on-dark-body);
+  }
+
+  .story p:last-child { margin-bottom: 0; }
+
+  .card {
+    flex: 1 1 380px;
+    min-width: 0;
+    border-color: var(--color-dark-border);
+    background: var(--color-dark-card);
+  }
+
+  h3 {
+    margin: 0 0 20px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-size: var(--text-list);
+  }
+
+  li {
+    display: flex;
+    gap: 12px;
+  }
+
+  svg {
+    flex: none;
+    margin-top: 4px;
+    color: var(--color-on-dark-accent);
+  }
+
+  @media (max-width: 400px) {
+    .card { padding: 24px; }
+  }
+</style>

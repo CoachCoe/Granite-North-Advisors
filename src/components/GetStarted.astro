@@ -1,0 +1,78 @@
+---
+import { fhcEmail, principals } from '../site.config';
+
+const [john] = principals;
+---
+<section id="request" class="request" aria-labelledby="request-title">
+  <div class="container section-pad">
+    <p class="eyebrow">Getting started</p>
+    <h2 id="request-title" class="h2">It starts with one email.</h2>
+    <p class="lede">The Foundation for Healthy Communities runs a program that pays for outside help for organizations getting Rural Health Transformation money. We're one of their approved consultants, so you can ask for us by name.</p>
+    <ol>
+      <li>
+        <p class="num" aria-hidden="true">1</p>
+        <h3 class="item-title">Email the Foundation</h3>
+        <p class="item-text">Send a note to <a href={`mailto:${fhcEmail}`}>{fhcEmail}</a>. Tell them what's going on and that you'd like to work with Granite North Advisors.</p>
+      </li>
+      <li>
+        <p class="num" aria-hidden="true">2</p>
+        <h3 class="item-title">We'll give you a call</h3>
+        <p class="item-text">We'll figure out what's bugging you most, decide what to fix first, and take care of the paperwork.</p>
+      </li>
+      <li>
+        <p class="num" aria-hidden="true">3</p>
+        <h3 class="item-title">We get to work</h3>
+        <p class="item-text">Once the Foundation signs off, we start. The program pays us. You won't get a bill.</p>
+      </li>
+    </ol>
+    <p class="qualify">We work with rural health clinics, FQHCs, community health centers, independent practices and critical access hospitals. Not sure you qualify? <a href={`mailto:${john.email}`}>Email us</a> and we'll find out for you.</p>
+  </div>
+</section>
+
+<style>
+  .request {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .h2 {
+    margin-bottom: 16px;
+    max-width: 760px;
+  }
+
+  .lede {
+    margin-bottom: 48px;
+    max-width: 720px;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 24px;
+  }
+
+  li {
+    border-top: 3px solid var(--color-accent);
+    padding-top: 20px;
+  }
+
+  .num {
+    margin: 0 0 8px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+
+  .item-text a { overflow-wrap: anywhere; }
+
+  .qualify {
+    margin: 40px 0 0;
+    font-size: var(--text-small);
+    color: var(--color-muted);
+  }
+</style>

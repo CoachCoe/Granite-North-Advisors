@@ -1,0 +1,97 @@
+---
+import '@fontsource/archivo/latin-500.css';
+import '@fontsource/archivo/latin-600.css';
+import '@fontsource/archivo/latin-700.css';
+import '@fontsource/archivo/latin-800.css';
+import '@fontsource/source-sans-3/latin-400.css';
+import '@fontsource/source-sans-3/latin-500.css';
+import '@fontsource/source-sans-3/latin-600.css';
+import '../styles/global.css';
+
+import archivo800 from '@fontsource/archivo/files/archivo-latin-800-normal.woff2?url';
+import sourceSans400 from '@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2?url';
+import sourceSans600 from '@fontsource/source-sans-3/files/source-sans-3-latin-600-normal.woff2?url';
+
+import { company, principals } from '../site.config';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: company.legalName,
+  alternateName: company.name,
+  url: canonical,
+  logo: new URL('/icon-512.png', Astro.site).href,
+  image: ogImage,
+  description,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: company.street,
+    addressLocality: company.city,
+    addressRegion: company.region,
+    postalCode: company.postalCode,
+    addressCountry: 'US',
+  },
+  areaServed: { '@type': 'State', name: 'New Hampshire' },
+  email: principals[0].email,
+  telephone: principals[0].phone,
+  employee: principals.map((p) => ({
+    '@type': 'Person',
+    name: p.name,
+    jobTitle: p.title,
+    email: p.email,
+    telephone: p.phone,
+  })),
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#F4F5F2" />
+
+    <link rel="preload" href={archivo800} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sourceSans400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sourceSans600} as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={company.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Granite North Advisors mountain logo on a light background" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Granite North Advisors mountain logo on a light background" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <slot />
+  </body>
+</html>

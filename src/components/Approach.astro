@@ -1,0 +1,53 @@
+---
+const principles = [
+  { title: 'One point person', text: 'We work closely with one person on your team, so the know-how stays in your building.' },
+  { title: 'We teach as we go', text: 'By the end, your point person can train the next new hire without us.' },
+  { title: "It's all yours", text: 'Every plan, checklist and document we make, you keep and can change.' },
+  { title: 'Nothing to sell you', text: 'No vendor pays us for recommending their product.' },
+  { title: "We'll come to you", text: "Most of it happens over video. When it needs to be in person, we'll drive. Colebrook included." },
+  { title: 'We call back', text: "You'll hear from us within three business days." },
+];
+---
+<section id="approach" class="container section-pad" aria-labelledby="approach-title">
+  <div class="layout">
+    <div class="intro">
+      <p class="eyebrow">How we work</p>
+      <h2 id="approach-title" class="h2">Built for places where the office manager is also the IT department.</h2>
+      <p class="lede">That's most practices we know. So we keep it simple, and we plan for the day we're not around anymore.</p>
+    </div>
+    <ul class="grid">
+      {principles.map((p) => (
+        <li>
+          <h3 class="item-title">{p.title}</h3>
+          <p class="item-text">{p.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+
+  .intro {
+    flex: 1 1 340px;
+    min-width: 0;
+  }
+
+  .h2 { margin-bottom: 20px; }
+
+  .grid {
+    flex: 1.4 1 420px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 32px 28px;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+const services = [
+  {
+    title: 'Getting paid for coordination',
+    intro: 'Your nurses already call folks after they get out of the hospital, track down referrals, and help people find a ride to Lebanon or Concord. A lot of that is billable. Most small practices just never get paid for it.',
+    items: [
+      'Matching the coordination work you already do to the codes that pay for it',
+      'Getting the Medicaid enhanced payments you qualify for',
+      'Social needs screening and referrals your staff can actually keep up with',
+    ],
+    icon: '<circle cx="6" cy="7" r="2.5"/><circle cx="18" cy="7" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.2 8.4 L10.6 16"/><path d="M15.8 8.4 L13.4 16"/><path d="M8.5 7 H15.5"/>',
+  },
+  {
+    title: 'Your EHR and AI tools',
+    intro: "We don't sell software, so we'll tell you straight what's worth it and what isn't.",
+    items: [
+      'Cleaning up EHR workflows so charting takes fewer clicks',
+      'Getting an AI scribe set up and actually used',
+      'Risk scores and decision support that fit the way you work',
+      'Getting your systems to share data with hospitals, labs and the state',
+      'Choosing and setting up a population health tool',
+    ],
+    icon: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20 H16"/><path d="M12 16 V20"/><path d="M7 11 L9.5 8.5 L12 11 L14.5 8 L17 10"/>',
+  },
+  {
+    title: 'Keeping your practice secure',
+    intro: "Ransomware crews go after small healthcare outfits because they're easy. We start with the fixes that do the most good for the least money and staff time.",
+    items: [
+      'Your required HIPAA security risk assessment, plus a plan to close the gaps',
+      'An incident response plan your staff has actually practiced',
+      'Help picking an outside security vendor, if you need one',
+      'Multi-factor login, access controls and device protection',
+      'Backups, and a plan for keeping care going if your systems go down',
+    ],
+    icon: '<path d="M12 3 L19 6 V11.5 C19 15.8 16 19.2 12 21 C8 19.2 5 15.8 5 11.5 V6 Z"/><path d="M9 12 L11.2 14.2 L15.5 9.8"/>',
+  },
+];
+---
+<section id="services" class="services" aria-labelledby="services-title">
+  <div class="container section-pad">
+    <p class="eyebrow">What we help with</p>
+    <h2 id="services-title" class="h2">The three things we get called about most.</h2>
+    <div class="grid">
+      {services.map((service) => (
+        <article class="card">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" set:html={service.icon} />
+          <h3>{service.title}</h3>
+          <p class="lede">{service.intro}</p>
+          <ul>
+            {service.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .h2 {
+    margin-bottom: 48px;
+    max-width: 760px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--color-ground);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  svg { color: var(--color-accent); }
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: var(--text-list);
+  }
+
+  @media (max-width: 400px) {
+    .card { padding: 24px; }
+  }
+</style>
