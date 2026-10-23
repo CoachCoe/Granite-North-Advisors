@@ -13,16 +13,16 @@ npm run build      # static output in dist/
 npm run preview    # serve dist/ the way production will
 ```
 
-## Add the headshots
+## Headshots
 
-Put square-ish photos at:
+The photos live at:
 
 ```
 src/assets/team/john-clemente.jpg
 src/assets/team/shawn-coe.jpg
 ```
 
-That's it. On the next build each photo is cropped to 224×224 and converted to AVIF and WebP. Without a file, the dashed `[PHOTO]` placeholder shows. `.jpeg`, `.png` and `.webp` work too, as long as the base name matches.
+To replace one, overwrite the file. On the next build each photo is cropped to 224×224 and converted to AVIF and WebP. If a file is missing, the dashed `[PHOTO]` placeholder shows instead. `.jpeg`, `.png` and `.webp` work too, as long as the base name matches. Strip location and camera metadata before committing a new photo, since this repo is public.
 
 ## Change the domain
 
