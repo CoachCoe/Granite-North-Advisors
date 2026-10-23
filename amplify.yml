@@ -17,8 +17,8 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-# Amplify ignores public/_headers (Cloudflare format), so the security and cache
-# headers are declared here instead. Keep this in sync with public/_headers.
+# Security and cache headers for the hosted site. This is the source of truth;
+# Amplify serves these on every response.
 customHeaders:
   - pattern: '**'
     headers:
