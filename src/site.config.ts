@@ -1,6 +1,6 @@
 // The one place the production domain lives. astro.config.mjs reads it for
 // canonical URLs, Open Graph tags and the sitemap.
-export const SITE_URL = 'https://granitenorthadvisors.com';
+export const SITE_URL = 'https://www.granitenorthadvisors.com';
 
 export const company = {
   name: 'Granite North Advisors',
