@@ -1,0 +1,135 @@
+---
+import { unblocker } from '../../site.config';
+import { CALC_DEFAULTS, calc, formatHours, formatUsd } from '../../data/unblocker-demo';
+
+// Same math the script runs, so the page is correct before any script loads.
+const start = calc(
+  CALC_DEFAULTS.questionnairesPerQuarter,
+  CALC_DEFAULTS.hoursEach,
+  CALC_DEFAULTS.hourlyCost,
+  unblocker.betaPriceMonthly,
+);
+---
+<section id="calculator" class="calc" aria-labelledby="calc-title">
+  <div class="container section-pad">
+    <div class="layout" data-calc>
+      <div class="controls">
+        <p class="eyebrow">Estimate</p>
+        <h2 id="calc-title" class="h2">What do questionnaires cost you today?</h2>
+        <p class="lede">
+          Adjust the sliders to match your team. These are your own estimates, and the result is only a rough guide. We aren't claiming a specific saving, because the beta is how we'll find out how much time this takes out.
+        </p>
+
+        <div class="field">
+          <div class="field-row">
+            <label for="calc-q">Security questionnaires each quarter</label>
+            <output for="calc-q" data-out="q">{CALC_DEFAULTS.questionnairesPerQuarter} questionnaires</output>
+          </div>
+          <input id="calc-q" type="range" min="1" max="10" step="1" value={CALC_DEFAULTS.questionnairesPerQuarter} data-input="q" />
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label for="calc-h">Hours to complete one</label>
+            <output for="calc-h" data-out="h">{CALC_DEFAULTS.hoursEach} hrs</output>
+          </div>
+          <input id="calc-h" type="range" min="2" max="40" step="1" value={CALC_DEFAULTS.hoursEach} data-input="h" />
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label for="calc-r">What an hour of that person's time costs</label>
+            <output for="calc-r" data-out="r">{formatUsd(CALC_DEFAULTS.hourlyCost)}/hr</output>
+          </div>
+          <input id="calc-r" type="range" min="75" max="300" step="25" value={CALC_DEFAULTS.hourlyCost} data-input="r" />
+        </div>
+      </div>
+
+      <div class="results" aria-live="polite">
+        <div class="result">
+          <p class="r-label">Hours you spend each year</p>
+          <p class="r-value" data-out="hours">{formatHours(start.hoursPerYear)}</p>
+        </div>
+        <div class="result">
+          <p class="r-label">What that time costs each year</p>
+          <p class="r-value" data-out="cost">{formatUsd(start.timeCostPerYear)}</p>
+        </div>
+        <div class="result plan">
+          <p class="r-label">Planned beta price for a year (12 × ${unblocker.betaPriceMonthly})</p>
+          <p class="r-value" data-out="plan">{formatUsd(start.planPerYear)}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .calc {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: center;
+  }
+
+  .h2 { margin-bottom: 16px; }
+  .lede { margin-bottom: 28px; }
+
+  .field { margin-top: 20px; }
+
+  .field-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+  }
+
+  label { font-weight: 600; }
+  output { font-weight: 700; color: var(--color-accent); font-variant-numeric: tabular-nums; }
+
+  input[type='range'] {
+    width: 100%;
+    min-height: 44px;
+    margin: 4px 0 0;
+    accent-color: var(--color-accent);
+    cursor: pointer;
+  }
+
+  .results {
+    display: grid;
+    gap: 16px;
+  }
+
+  .result {
+    background: var(--color-ground);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    padding: 22px 24px;
+  }
+
+  .result.plan {
+    background: #EEF4F1;
+    border-color: var(--color-pill-border);
+  }
+
+  .r-label { margin: 0; font-size: var(--text-small); color: var(--color-muted); }
+
+  .r-value {
+    margin: 4px 0 0;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(30px, 4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

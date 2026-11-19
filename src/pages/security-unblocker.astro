@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import UHero from '../components/unblocker/UHero.astro';
+import Problem from '../components/unblocker/Problem.astro';
+import Workflow from '../components/unblocker/Workflow.astro';
+import Kit from '../components/unblocker/Kit.astro';
+import Compare from '../components/unblocker/Compare.astro';
+import Calculator from '../components/unblocker/Calculator.astro';
+import Pricing from '../components/unblocker/Pricing.astro';
+import Faq from '../components/unblocker/Faq.astro';
+import FinalCta from '../components/unblocker/FinalCta.astro';
+import '../styles/unblocker.css';
+
+const title = 'Security Unblocker · Answer security questionnaires before you have SOC 2 · Granite North Advisors';
+const description =
+  'In development: honest, evidence-backed answers to enterprise security questionnaires, plus a security packet for the buyer, for small B2B software teams without a SOC 2 report. Join the beta waitlist.';
+---
+<Base title={title} description={description}>
+  <Header base="/" />
+  <main id="main" tabindex="-1">
+    <UHero />
+    <Problem />
+    <Workflow />
+    <Kit />
+    <Compare />
+    <Calculator />
+    <Pricing />
+    <Faq />
+    <FinalCta />
+  </main>
+  <Footer />
+  <script>
+    import '../scripts/unblocker.ts';
+  </script>
+</Base>

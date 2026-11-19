@@ -1,0 +1,55 @@
+---
+import { waitlistHref } from '../../site.config';
+---
+<section class="cta on-dark" aria-labelledby="cta-title">
+  <div class="container inner">
+    <h2 id="cta-title">Be one of the first teams in.</h2>
+    <p>
+      Tell us about the questionnaire that's holding up your next deal. We'll build for the stuck ones first.
+    </p>
+    <a class="u-btn u-btn-primary" href={waitlistHref}>Join the beta waitlist</a>
+    <p class="fine">
+      Security Unblocker is in development. Descriptions on this page are plans and may change. It isn't a SOC 2 report or audit, and it isn't legal advice.
+    </p>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--color-dark);
+    color: var(--color-on-dark);
+  }
+
+  .inner {
+    padding-top: 88px;
+    padding-bottom: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  h2 {
+    margin: 0;
+    max-width: 760px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--text-h2);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+  }
+
+  p {
+    margin: 0;
+    max-width: 640px;
+    font-size: var(--text-lead);
+    color: var(--color-on-dark-body);
+  }
+
+  .fine {
+    margin-top: 28px;
+    font-size: 15px;
+    color: var(--color-on-dark-muted);
+  }
+</style>

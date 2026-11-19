@@ -1,0 +1,185 @@
+---
+import { unblocker } from '../../site.config';
+
+const rows = [
+  {
+    metric: 'Typical cost',
+    platform: 'From about $7,500 a year, plus auditor fees. Quote-based.',
+    diy: 'No cash, but days of founder and engineer time.',
+    plan: `Planned beta: $${unblocker.betaPriceMonthly}/mo. Standard: $${unblocker.standardPriceMonthly}/mo.`,
+  },
+  {
+    metric: 'Time to a first answer',
+    platform: 'Weeks to months of setup first.',
+    diy: 'Days of work for each questionnaire.',
+    plan: 'Goal: same day.',
+  },
+  {
+    metric: 'Are the answers checkable?',
+    platform: 'Strong once fully set up.',
+    diy: 'Written from memory. Hard to back up.',
+    plan: 'Checked against your real setup. Gaps stated plainly.',
+  },
+  {
+    metric: 'What the buyer receives',
+    platform: 'A SOC 2 report, once you have earned one.',
+    diy: 'Ad hoc PDFs and email replies.',
+    plan: 'A security packet with your signed attestation. Not a SOC 2 report.',
+  },
+  {
+    metric: 'Value after the deal',
+    platform: 'Built for the audit.',
+    diy: 'You start over next time.',
+    plan: 'An organized evidence kit you can hand to an auditor later.',
+  },
+  {
+    metric: 'Commitment',
+    platform: 'Often an annual contract.',
+    diy: 'None.',
+    plan: 'Planned month to month.',
+  },
+];
+---
+<section id="compare" class="compare" aria-labelledby="compare-title">
+  <div class="container section-pad">
+    <p class="eyebrow">How it compares</p>
+    <h2 id="compare-title" class="h2">Built for the moment before you need a full audit.</h2>
+    <p class="lede intro">
+      Compliance platforms are the right answer once an audit is the goal. This is for the weeks when one deal is waiting on a questionnaire and you aren't there yet.
+    </p>
+
+    <div class="scroll" role="region" aria-labelledby="compare-title" tabindex="0">
+      <table>
+        <caption class="visually-hidden">Comparison of a full compliance platform, doing it yourself, and Security Unblocker</caption>
+        <thead>
+          <tr>
+            <th scope="col"><span class="visually-hidden">What we compare</span></th>
+            <th scope="col">Full compliance platform</th>
+            <th scope="col">Doing it yourself</th>
+            <th scope="col" class="featured">Security Unblocker <span class="tag">planned</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr>
+              <th scope="row">{row.metric}</th>
+              <td data-label="Full compliance platform">{row.platform}</td>
+              <td data-label="Doing it yourself">{row.diy}</td>
+              <td class="featured" data-label="Security Unblocker (planned)">{row.plan}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .compare { border-bottom: 1px solid var(--color-border); }
+
+  .h2 { margin-bottom: 16px; max-width: 760px; }
+  .intro { margin-bottom: 40px; max-width: 720px; }
+
+  .scroll {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+    font-size: var(--text-small);
+  }
+
+  thead th {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--color-ink);
+  }
+
+  tbody th {
+    font-weight: 600;
+    color: var(--color-ink);
+    width: 20%;
+  }
+
+  td { color: var(--color-body); }
+  tbody tr:last-child th,
+  tbody tr:last-child td { border-bottom: 0; }
+
+  .featured { background: #EEF4F1; }
+  td.featured { color: var(--color-ink); font-weight: 600; }
+
+  /* Phones: one card per row, so the Security Unblocker column is never
+     hidden behind a sideways scroll. */
+  @media (max-width: 760px) {
+    .scroll { background: transparent; border: 0; border-radius: 0; overflow: visible; }
+
+    table, tbody, tr, th, td { display: block; min-width: 0; width: auto; }
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+
+    tbody tr {
+      margin-bottom: 16px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    tbody th {
+      width: auto;
+      padding: 16px 20px 8px;
+      border-bottom: 0;
+      font-family: var(--font-heading);
+      font-size: 18px;
+    }
+
+    td {
+      padding: 10px 20px;
+      border-bottom: 0;
+    }
+
+    td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-muted);
+    }
+
+    td.featured { padding-bottom: 14px; margin-top: 6px; }
+    tbody tr:last-child td { border-bottom: 0; }
+  }
+
+  .tag {
+    margin-left: 6px;
+    padding: 1px 8px;
+    border: 1px solid var(--color-pill-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+</style>

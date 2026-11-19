@@ -1,0 +1,300 @@
+---
+import { CONTROLS, QUESTION_ENC, QUESTION_PR, answerEncMfa, answerPr, countVerified } from '../../data/unblocker-demo';
+
+const steps = [
+  { kicker: 'Step 1', label: 'Connect your stack' },
+  { kicker: 'Step 2', label: 'Upload the questionnaire' },
+  { kicker: 'Step 3', label: 'Review and send' },
+];
+
+// Server-rendered starting state: every control in place.
+const start = { pr: true, enc: true, mfa: true };
+const prAnswer = answerPr(start);
+const encAnswer = answerEncMfa(start);
+const verified = countVerified(start);
+---
+<section id="how" class="how" aria-labelledby="how-title">
+  <div class="container section-pad">
+    <p class="eyebrow">How it will work</p>
+    <h2 id="how-title" class="h2">From a stuck spreadsheet to a packet you can send.</h2>
+    <p class="lede intro">
+      This preview shows how we plan for it to work, using made-up example data. Flip a setting and watch the answers change. If a control isn't in place, the draft says so instead of guessing.
+    </p>
+
+    <div class="demo" data-tabs data-preview>
+      <div class="demo-head">
+        <span class="u-chip is-neutral">Preview · example data, not a live product</span>
+      </div>
+
+      <div class="u-tablist" role="tablist" aria-label="Steps">
+        {steps.map((step, i) => (
+          <button
+            type="button"
+            role="tab"
+            class="u-tab"
+            id={`wf-tab-${i}`}
+            aria-controls={`wf-panel-${i}`}
+            aria-selected={String(i === 0)}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            <span class="u-tab-kicker">{step.kicker}</span>
+            <span class="u-tab-label">{step.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="body">
+        <div class="settings">
+          <h3 class="settings-title">Try it: change the example stack</h3>
+          <ul>
+            {CONTROLS.map((control) => (
+              <li>
+                <div class="setting-text">
+                  <span class="setting-name" id={`sw-${control.key}`}>{control.title}</span>
+                  <span class="setting-sub">{control.sub}</span>
+                </div>
+                <button
+                  type="button"
+                  class="switch"
+                  role="switch"
+                  aria-checked="true"
+                  aria-labelledby={`sw-${control.key}`}
+                  data-switch={control.key}
+                >
+                  <span class="track"><span class="thumb"></span></span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="stage">
+          <div class="u-panel" role="tabpanel" id="wf-panel-0" aria-labelledby="wf-tab-0">
+            <h3>We check what's actually true</h3>
+            <p class="step-text">
+              Read-only connections to GitHub, your cloud account and Google Workspace let us look at your real settings, so you don't have to remember them or guess.
+            </p>
+            <ul class="checks">
+              {CONTROLS.map((control) => (
+                <li data-control={control.key}>
+                  <span>{control.title}</span>
+                  <span class="u-chip" data-status>Verified</span>
+                </li>
+              ))}
+            </ul>
+            <p class="tally"><span class="u-chip" data-count>{verified} of 3 controls verified</span></p>
+          </div>
+
+          <div class="u-panel" role="tabpanel" id="wf-panel-1" aria-labelledby="wf-tab-1" hidden>
+            <h3>Every question gets matched to the evidence</h3>
+            <p class="step-text">
+              Where a control is in place, the answer says so. Where it isn't, the draft says that plainly and suggests a realistic fix and date. Nothing is invented.
+            </p>
+            <div class="qa">
+              <div class="qa-head">
+                <p class="q">{QUESTION_PR}</p>
+                <span class="u-chip" data-flag="pr">Backed by evidence</span>
+              </div>
+              <p class="a" data-answer="pr">{prAnswer.text}</p>
+            </div>
+            <div class="qa">
+              <div class="qa-head">
+                <p class="q">{QUESTION_ENC}</p>
+                <span class="u-chip" data-flag="encmfa">Backed by evidence</span>
+              </div>
+              <p class="a" data-answer="encmfa">{encAnswer.text}</p>
+            </div>
+          </div>
+
+          <div class="u-panel" role="tabpanel" id="wf-panel-2" aria-labelledby="wf-tab-2" hidden>
+            <h3>You review everything, then send it</h3>
+            <p class="step-text">
+              You read and edit every answer. When you're happy, export the finished questionnaire together with a security packet for the buyer.
+            </p>
+            <ul class="bundle">
+              <li>The answered questionnaire, in the buyer's own format</li>
+              <li>A short executive summary of your security approach</li>
+              <li>A list of the outside services that handle your data</li>
+              <li>An attestation letter, signed by you</li>
+              <li>Evidence snapshots: <strong data-evidence-count>{verified} of 3</strong> attached</li>
+              <li data-gaps-line hidden><span data-gaps-text>1 open gap, with a planned fix</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .how { border-bottom: 1px solid var(--color-border); }
+
+  .h2 { margin-bottom: 16px; max-width: 760px; }
+  .intro { margin-bottom: 40px; max-width: 720px; }
+
+  .demo {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .demo-head { margin-bottom: 14px; }
+
+  .body {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .settings,
+  .stage {
+    background: var(--color-ground);
+    border-radius: var(--radius-card);
+    padding: 24px;
+  }
+
+  .settings-title {
+    margin: 0 0 16px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 19px;
+  }
+
+  .settings ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .settings li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .setting-text { display: flex; flex-direction: column; min-width: 0; }
+  .setting-name { font-weight: 600; line-height: 1.35; }
+  .setting-sub { font-size: 15px; color: var(--color-muted); }
+
+  .switch {
+    flex: none;
+    width: 56px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .track {
+    width: 48px;
+    height: 28px;
+    padding: 3px;
+    border-radius: 999px;
+    background: #8A968F;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.15s ease;
+  }
+
+  .thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    transition: transform 0.15s ease;
+  }
+
+  .switch[aria-checked='true'] .track { background: var(--color-accent); }
+  .switch[aria-checked='true'] .thumb { transform: translateX(20px); }
+
+  .stage h3 {
+    margin: 0 0 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .step-text { margin: 0 0 20px; color: var(--color-body); }
+
+  .checks {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .checks li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .tally { margin: 16px 0 0; }
+
+  .qa {
+    margin-top: 12px;
+    padding: 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .qa-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+
+  .q { margin: 0; font-weight: 600; line-height: 1.4; flex: 1 1 240px; }
+  .a { margin: 10px 0 0; font-size: var(--text-small); color: var(--color-body); }
+
+  .bundle {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: var(--text-list);
+  }
+
+  [data-gaps-line] { color: #7A4A00; font-weight: 600; }
+
+  @media (max-width: 860px) {
+    .body { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .demo { padding: 12px; }
+    .settings, .stage { padding: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .track, .thumb { transition: none; }
+  }
+</style>

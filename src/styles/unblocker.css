@@ -1,0 +1,129 @@
+/* Shared pieces for the Security Unblocker page. Built on the site tokens so
+   the page matches the rest of the site. Imported only by that page. */
+
+/* Buttons */
+.u-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-button);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.u-btn-primary { background: var(--color-accent); color: #FFFFFF; }
+.u-btn-primary:hover { background: var(--color-accent-hover); color: #FFFFFF; }
+.u-btn-secondary { border-color: var(--color-ink); color: var(--color-ink); background: transparent; }
+.u-btn-secondary:hover { background: var(--color-surface); color: var(--color-ink); }
+
+.on-dark .u-btn-primary { background: var(--color-on-dark-accent); color: var(--color-dark); }
+.on-dark .u-btn-primary:hover { background: #FFFFFF; color: var(--color-dark); }
+.on-dark .u-btn-secondary { border-color: var(--color-on-dark-muted); color: var(--color-on-dark); }
+.on-dark .u-btn-secondary:hover { background: var(--color-dark-card); color: #FFFFFF; }
+
+/* Chips */
+.u-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 12px;
+  border: 1px solid var(--color-pill-border);
+  border-radius: 999px;
+  background: #E4EFEA;
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.u-chip.is-warn { background: #FBF0E1; color: #7A4A00; border-color: #E6CFA6; }
+.u-chip.is-neutral { background: var(--color-placeholder); color: var(--color-muted); border-color: var(--color-border); }
+
+/* Tabs. The panels are real HTML, so without scripting every panel shows. */
+.u-tablist {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: #E9ECE8;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+.u-tab {
+  flex: 1 1 0;
+  min-width: 150px;
+  min-height: 56px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--color-body);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.u-tab:hover { background: rgba(255, 255, 255, 0.6); }
+.u-tab[aria-selected='true'] {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 0 1px 2px rgba(22, 32, 28, 0.12), 0 0 0 1px var(--color-border);
+}
+.u-tab-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.u-tab-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+/* On phones, stack the tabs so none of them is hidden off the edge. */
+@media (max-width: 640px) {
+  .u-tablist { flex-direction: column; overflow: visible; }
+  .u-tab { flex: none; min-width: 0; }
+}
+
+@media (scripting: none) {
+  .u-tablist { display: none; }
+  [role='tabpanel'][hidden] { display: block; }
+}
+
+/* Sample documents: clearly marked as examples. */
+.u-sample {
+  background: var(--color-surface);
+  border: 1px dashed var(--color-placeholder-border);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  font-size: var(--text-small);
+}
+.u-sample-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+.u-sample-title { margin: 0; font-weight: 600; color: var(--color-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .u-btn, .u-tab { transition: none; }
+}

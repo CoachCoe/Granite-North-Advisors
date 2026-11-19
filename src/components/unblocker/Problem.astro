@@ -1,0 +1,97 @@
+---
+const choices = [
+  {
+    title: 'Buy a full compliance platform',
+    text: "These tools are built for the audit, and entry pricing usually starts around $7,500 a year before auditor fees. That's a lot to spend before a single deal closes.",
+    points: ['Real money up front', 'Setup and evidence gathering take time, and a SOC 2 report itself takes months to earn'],
+  },
+  {
+    title: "Spend the founders' time on it",
+    text: 'Your most expensive people spend days in a spreadsheet, guessing at answers about encryption, access and incident response. A wrong answer in a signed questionnaire can come back on you.',
+    points: ['Pulls engineers off the product', "Answers don't get reused for the next buyer"],
+  },
+  {
+    title: 'Let the deal sit',
+    text: 'An unanswered questionnaire stalls procurement. The pilot slips, the champion loses momentum, and a competitor with a report gets the logo.',
+    points: ['Pilots and early contracts go cold', 'You learn less from the customer you wanted'],
+  },
+];
+---
+<section id="problem" class="problem" aria-labelledby="problem-title">
+  <div class="container section-pad">
+    <p class="eyebrow">The problem</p>
+    <h2 id="problem-title" class="h2">Three ways this usually goes wrong.</h2>
+    <p class="lede intro">
+      Early-stage teams hit the same wall on their first real enterprise deal. Each way out costs runway, focus, or the deal itself.
+    </p>
+    <div class="grid">
+      {choices.map((choice, i) => (
+        <article class="card">
+          <p class="num" aria-hidden="true">0{i + 1}</p>
+          <h3>{choice.title}</h3>
+          <p class="text">{choice.text}</p>
+          <ul>
+            {choice.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .h2 { margin-bottom: 16px; max-width: 760px; }
+  .intro { margin-bottom: 48px; max-width: 720px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--color-ground);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .num {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .text { margin: 0; color: var(--color-body); }
+
+  ul {
+    margin: 4px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: var(--text-list);
+    color: var(--color-body);
+  }
+
+  @media (max-width: 400px) {
+    .card { padding: 24px; }
+  }
+</style>

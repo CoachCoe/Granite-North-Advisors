@@ -1,24 +1,33 @@
 ---
 import MountainMark from './MountainMark.astro';
-import { company } from '../site.config';
+import { company, unblocker } from '../site.config';
+
+interface Props {
+  /** Prefix for in-page links. Pass "/" on pages other than the home page. */
+  base?: string;
+}
+const { base = '' } = Astro.props;
+
+const onUnblocker = Astro.url.pathname.startsWith(unblocker.path);
 
 const links = [
-  { href: '#services', label: 'What we do' },
-  { href: '#approach', label: 'How we work' },
-  { href: '#team', label: 'Who we are' },
-  { href: '#request', label: 'Get started' },
+  { href: `${base}#services`, label: 'What we do', current: false },
+  { href: `${base}#approach`, label: 'How we work', current: false },
+  { href: `${base}#team`, label: 'Who we are', current: false },
+  { href: `${base}#request`, label: 'Get started', current: false },
+  { href: unblocker.path, label: unblocker.name, current: onUnblocker },
 ];
 ---
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="#top">
+    <a class="brand" href={base ? '/' : '#top'}>
       <span class="mark"><MountainMark /></span>
       <span class="wordmark">{company.name}</span>
     </a>
     <nav aria-label="Main">
       <ul>
         {links.map((link) => (
-          <li><a href={link.href}>{link.label}</a></li>
+          <li><a href={link.href} aria-current={link.current ? 'page' : undefined}>{link.label}</a></li>
         ))}
       </ul>
     </nav>
@@ -79,6 +88,13 @@ const links = [
   }
 
   nav a:hover { color: var(--color-accent); }
+
+  nav a[aria-current='page'] {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+  }
 
   @media (max-width: 480px) {
     ul { gap: 0 20px; }

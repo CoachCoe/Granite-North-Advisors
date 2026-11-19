@@ -1,0 +1,157 @@
+---
+import { unblocker, waitlistHref } from '../../site.config';
+
+const plans = [
+  {
+    tag: 'Founding beta',
+    price: unblocker.betaPriceMonthly,
+    blurb: "For the first teams in. You'll help shape what we build, and we'll build for your stuck questionnaire first.",
+    points: [
+      'Questionnaire drafting from your real setup',
+      'The four-part kit, built as you go',
+      'Evidence snapshots from GitHub, your cloud and Google Workspace',
+      'Month to month, cancel any time',
+    ],
+    featured: true,
+  },
+  {
+    tag: 'Standard',
+    price: unblocker.standardPriceMonthly,
+    blurb: 'The planned price once the beta ends. Still a fraction of a full compliance platform.',
+    points: [
+      'Everything in the beta',
+      'An export bundle for handing to an audit firm later',
+      'Month to month, cancel any time',
+    ],
+    featured: false,
+  },
+];
+---
+<section id="pricing" class="pricing" aria-labelledby="pricing-title">
+  <div class="container section-pad">
+    <p class="eyebrow">Planned pricing</p>
+    <h2 id="pricing-title" class="h2">Priced for a seed-stage runway.</h2>
+    <p class="lede intro">
+      No annual lock-in, and nothing is charged to join the waitlist. Prices and features are our plans and may change before launch.
+    </p>
+
+    <div class="plans">
+      {plans.map((plan) => (
+        <article class:list={['card', { featured: plan.featured }]}>
+          <p class="tag">{plan.tag}</p>
+          <p class="price">${plan.price}<span class="unit">/mo</span></p>
+          <p class="blurb">{plan.blurb}</p>
+          <ul>
+            {plan.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+
+    <div class="join" id="waitlist">
+      <div>
+        <h3>Join the waitlist</h3>
+        <p>
+          Send us a short email and we'll add you. We'll write back when beta spots open, and we'll ask what questionnaire is stuck so we can build for it first. No payment, no obligation.
+        </p>
+      </div>
+      <div class="join-actions">
+        <a class="u-btn u-btn-primary" href={waitlistHref}>Email to join the waitlist</a>
+        <p class="join-note">Opens your email app with a short note to fill in. It goes to {unblocker.waitlistEmail}.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing { border-bottom: 1px solid var(--color-border); }
+
+  .h2 { margin-bottom: 16px; max-width: 760px; }
+  .intro { margin-bottom: 40px; max-width: 720px; }
+
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card.featured {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent);
+  }
+
+  .tag {
+    margin: 0;
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .price {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .unit {
+    margin-left: 4px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--color-muted);
+  }
+
+  .blurb { margin: 0; color: var(--color-body); }
+
+  ul {
+    margin: 4px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: var(--text-list);
+  }
+
+  .join {
+    margin-top: 40px;
+    padding: 32px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 40px;
+  }
+
+  .join > div:first-child { flex: 1 1 380px; min-width: 0; }
+
+  .join h3 {
+    margin: 0 0 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 26px;
+  }
+
+  .join p { margin: 0; color: var(--color-body); }
+
+  .join-actions { flex: 0 1 auto; }
+  .join-note { margin-top: 10px; max-width: 320px; font-size: 15px; color: var(--color-muted); overflow-wrap: anywhere; }
+
+  @media (max-width: 400px) {
+    .join { padding: 24px; }
+  }
+</style>

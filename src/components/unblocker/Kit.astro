@@ -1,0 +1,256 @@
+---
+const modules = [
+  {
+    kicker: 'Part 1',
+    label: 'Policies',
+    title: 'Short, plain security policies',
+    intro: 'Written for a team of 5 to 20, not an 80-page binder. Each one is short enough that your team will read it.',
+    items: [
+      'Information security and acceptable use',
+      'Access control and least privilege',
+      'Incident response plan (two pages)',
+      'Data classification and encryption',
+      'Change management: reviews and release checks',
+      'Vendor and sub-processor management',
+      'Backup and disaster recovery',
+    ],
+  },
+  {
+    kicker: 'Part 2',
+    label: 'Architecture',
+    title: 'A picture of how your data moves',
+    intro: 'Reviewers understand your setup in seconds instead of sending follow-up questions.',
+    items: [
+      'Architecture diagram: networks, databases, firewalls',
+      'Data flow map from customer to database',
+      'List of the outside services that handle your data, with links to their own security reports',
+    ],
+  },
+  {
+    kicker: 'Part 3',
+    label: 'Evidence',
+    title: 'Dated proof that your controls are on',
+    intro: 'Snapshots pulled from your real accounts, so an answer can point to something a reviewer can check.',
+    items: [
+      'Code review settings from GitHub or GitLab',
+      'Cloud settings: storage access, encryption, administrator MFA',
+      'Who has access to what, from Google Workspace, GitHub and your cloud',
+      'Dependency scan results',
+    ],
+  },
+  {
+    kicker: 'Part 4',
+    label: 'Buyer packet',
+    title: 'What you attach to the procurement thread',
+    intro: 'A tidy bundle that answers the usual follow-up questions before they are asked.',
+    items: [
+      'Executive summary of your security approach',
+      'Pre-written answers to about 25 common procurement questions',
+      "Your cloud provider's published security reports, with a note on what they do and don't cover",
+      'An attestation letter that you review and sign',
+    ],
+  },
+];
+---
+<section id="kit" class="kit" aria-labelledby="kit-title">
+  <div class="container section-pad">
+    <p class="eyebrow">What you'll get</p>
+    <h2 id="kit-title" class="h2">Four pieces, built as you answer.</h2>
+    <p class="lede intro">
+      Every questionnaire you finish adds to a kit you keep. If you later decide a full audit makes sense, the pieces an auditor asks for are already organized. The previews below are samples of the planned format.
+    </p>
+
+    <div class="explorer" data-tabs>
+      <div class="u-tablist" role="tablist" aria-label="Kit parts">
+        {modules.map((mod, i) => (
+          <button
+            type="button"
+            role="tab"
+            class="u-tab"
+            id={`kit-tab-${i}`}
+            aria-controls={`kit-panel-${i}`}
+            aria-selected={String(i === 0)}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            <span class="u-tab-kicker">{mod.kicker}</span>
+            <span class="u-tab-label">{mod.label}</span>
+          </button>
+        ))}
+      </div>
+
+      {modules.map((mod, i) => (
+        <div role="tabpanel" id={`kit-panel-${i}`} aria-labelledby={`kit-tab-${i}`} hidden={i !== 0}>
+         <div class="panel">
+          <div class="list">
+            <h3>{mod.title}</h3>
+            <p class="panel-intro">{mod.intro}</p>
+            <ul>
+              {mod.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+
+          <div class="u-sample">
+            <div class="u-sample-head">
+              <p class="u-sample-title">
+                {i === 0 && 'Sample: incident response plan'}
+                {i === 1 && 'Sample: data flow diagram'}
+                {i === 2 && 'Sample: evidence snapshot'}
+                {i === 3 && 'Sample: attestation letter'}
+              </p>
+              <span class="u-chip is-neutral">Example, not real data</span>
+            </div>
+
+            {i === 0 && (
+              <div class="doc">
+                <p><strong>1. Decide how serious it is (first hour)</strong></p>
+                <p class="muted">Suspected unauthorized access to production systems, customer data or administrator credentials is treated as the highest severity. The named incident lead is told right away.</p>
+                <p><strong>2. Contain it and keep the evidence</strong></p>
+                <p class="muted">Revoke exposed keys and tokens. Take a snapshot of affected systems before changing or shutting anything down.</p>
+                <p><strong>3. Tell affected customers</strong></p>
+                <p class="muted">Confirmed exposure of customer data is reported to the affected customers' security contacts within the time your contracts require, with a plain summary of what happened.</p>
+              </div>
+            )}
+
+            {i === 1 && (
+              <div class="doc">
+                <svg viewBox="0 0 460 150" role="img" aria-label="Diagram: customer traffic goes through a firewall and load balancer, to the application servers inside a private network, and then to an encrypted database.">
+                  <rect class="box" x="6" y="45" width="76" height="58" rx="8" />
+                  <text class="t1" x="44" y="71" text-anchor="middle">Customer</text>
+                  <text class="t2" x="44" y="87" text-anchor="middle">Browser or API</text>
+
+                  <line class="arrow" x1="82" y1="74" x2="108" y2="74" />
+                  <polygon class="head" points="108,70 116,74 108,78" />
+
+                  <rect class="box accent" x="116" y="45" width="84" height="58" rx="8" />
+                  <text class="t1 on-accent" x="158" y="70" text-anchor="middle">Firewall</text>
+                  <text class="t2 on-accent" x="158" y="86" text-anchor="middle">+ load balancer</text>
+
+                  <line class="arrow" x1="200" y1="74" x2="224" y2="74" />
+                  <polygon class="head" points="224,70 232,74 224,78" />
+
+                  <rect class="zone" x="232" y="18" width="220" height="114" rx="10" />
+                  <text class="zone-label" x="244" y="35">Private network</text>
+
+                  <rect class="box" x="244" y="46" width="88" height="56" rx="8" />
+                  <text class="t1" x="288" y="70" text-anchor="middle">Application</text>
+                  <text class="t2" x="288" y="86" text-anchor="middle">servers</text>
+
+                  <line class="arrow" x1="332" y1="74" x2="350" y2="74" />
+                  <polygon class="head" points="350,70 358,74 350,78" />
+
+                  <rect class="box accent" x="358" y="46" width="84" height="56" rx="8" />
+                  <text class="t1 on-accent" x="400" y="70" text-anchor="middle">Database</text>
+                  <text class="t2 on-accent" x="400" y="86" text-anchor="middle">encrypted</text>
+                </svg>
+                <p class="muted small">Your real diagram would also list the outside services that handle data, such as your cloud host, payment processor and error monitoring, each linked to its own security report.</p>
+              </div>
+            )}
+
+            {i === 2 && (
+              <div class="doc">
+                <ul class="rows">
+                  <li><span>Main branch requires an approved review before merge</span><span class="u-chip">Pass</span></li>
+                  <li><span>Public access to file storage is blocked</span><span class="u-chip">Pass</span></li>
+                  <li><span>Multi-factor login required for administrators</span><span class="u-chip">Pass</span></li>
+                  <li><span>No open critical vulnerabilities in dependencies</span><span class="u-chip">Pass</span></li>
+                </ul>
+                <p class="muted small">Each real row would carry the date it was checked and the raw settings it came from.</p>
+              </div>
+            )}
+
+            {i === 3 && (
+              <div class="doc">
+                <p><strong>Security statement</strong></p>
+                <p class="muted">We have not yet completed a SOC 2 audit. Our production systems run in isolated cloud networks, data is encrypted in transit and at rest, administrators use multi-factor login, and code changes are reviewed before release.</p>
+                <p><strong>Attestation</strong></p>
+                <p class="muted">"I have reviewed this packet, and it accurately describes our systems and practices as of the date below."</p>
+                <p class="muted small">Signed by your own officer. Granite North Advisors does not attest to your controls.</p>
+              </div>
+            )}
+          </div>
+         </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .kit {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .h2 { margin-bottom: 16px; max-width: 760px; }
+  .intro { margin-bottom: 40px; max-width: 720px; }
+
+  .panel {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 32px;
+    align-items: start;
+  }
+
+  .list h3 {
+    margin: 0 0 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .panel-intro { margin: 0 0 16px; color: var(--color-body); }
+
+  .list ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: var(--text-list);
+  }
+
+  .u-sample { background: var(--color-ground); }
+
+  .doc p { margin: 0 0 10px; }
+  .doc p:last-child { margin-bottom: 0; }
+  .muted { color: var(--color-body); }
+  .small { font-size: 15px; color: var(--color-muted); }
+
+  .rows {
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rows li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 16px;
+    padding: 10px 14px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  svg { width: 100%; height: auto; margin-bottom: 12px; }
+  .box { fill: var(--color-surface); stroke: var(--color-placeholder-border); stroke-width: 1.5; }
+  .box.accent { fill: var(--color-accent); stroke: var(--color-accent); }
+  .zone { fill: none; stroke: var(--color-placeholder-border); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .zone-label { font-size: 10px; font-weight: 600; fill: var(--color-muted); }
+  .t1 { font-size: 11px; font-weight: 700; fill: var(--color-ink); }
+  .t2 { font-size: 9.5px; fill: var(--color-muted); }
+  .on-accent { fill: #FFFFFF; }
+  .arrow { stroke: var(--color-accent); stroke-width: 2; }
+  .head { fill: var(--color-accent); }
+
+  @media (max-width: 860px) {
+    .panel { grid-template-columns: 1fr; }
+  }
+</style>
