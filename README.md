@@ -42,14 +42,15 @@ Edit `SITE_URL` in `src/site.config.ts`. The canonical URL, Open Graph and Twitt
 | `src/styles/tokens.css` | Colors, type sizes, spacing as CSS custom properties |
 | `src/styles/global.css` | Base styles, focus ring, skip link, shared classes |
 | `src/layouts/Base.astro` | `<head>`: meta tags, fonts, favicons, JSON-LD |
-| `amplify.yml` | Build spec plus security and cache headers for AWS Amplify |
+| `amplify.yml` | Build spec for AWS Amplify |
+| `customHttp.yml` | Security and cache headers (CSP, HSTS) that Amplify applies to every response |
 | `scripts/make-icons.mjs` | Regenerates the favicon set and `og.png` (`npm run icons`, needs Google Chrome) |
 
 Fonts (Archivo and Source Sans 3) are self-hosted from `@fontsource`, Latin subset only. Fallback fonts are metric-matched, so the swap doesn't move the layout.
 
 ## Deploy (AWS Amplify)
 
-**From Git:** in the AWS Amplify console, choose Create new app → Host web app → GitHub, authorize access to this repo, and pick the `main` branch. Amplify detects `amplify.yml` and uses it for the build and the response headers; no extra build settings are needed.
+**From Git:** in the AWS Amplify console, choose Create new app → Host web app → GitHub, authorize access to this repo, and pick the `main` branch. Amplify detects `amplify.yml` for the build and `customHttp.yml` for the response headers; no extra settings are needed.
 
 Then add the custom domain under the app's **Hosting → Custom domains** tab. Amplify issues an ACM certificate and gives you the DNS records to add at your registrar.
 
@@ -67,4 +68,4 @@ The product is in development, so the page says "planned" and "goal" throughout 
 ## Ground rules
 
 - Every contact action is a `mailto:` or `tel:` link. Don't add forms. People will type patient details into anything that looks like one.
-- No trackers, chat widgets or cookies. If you add analytics, use a cookieless one (e.g. Plausible), and update the CSP in `amplify.yml` to allow it.
+- No trackers, chat widgets or cookies. If you add analytics, use a cookieless one (e.g. Plausible), and update the CSP in `customHttp.yml` to allow it.
