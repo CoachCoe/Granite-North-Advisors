@@ -15,14 +15,14 @@ export const principals = [
   {
     name: 'John Clemente',
     title: 'Principal',
-    email: 'john@cosmaneura.com',
+    email: 'john@granitenorthadvisors.com',
     phone: '+15187274100',
     phoneDisplay: '518.727.4100',
   },
   {
     name: 'Shawn Coe',
     title: 'Principal',
-    email: 'shawn.coe@me.com',
+    email: 'shawn@granitenorthadvisors.com',
     phone: '+16033008082',
     phoneDisplay: '603.300.8082',
   },
