@@ -34,7 +34,7 @@ Edit `SITE_URL` in `src/site.config.ts`. The canonical URL, Open Graph and Twitt
 | --- | --- |
 | `src/pages/index.astro` | The home page: title, meta description, section order |
 | `src/pages/security-unblocker.astro` | The Security Unblocker page (`/security-unblocker/`) |
-| `src/components/` | One component per section, plus `MountainMark` and `Headshot` |
+| `src/components/` | One component per section, plus `Headshot` |
 | `src/components/unblocker/` | Sections of the Security Unblocker page |
 | `src/data/unblocker-demo.ts` | Copy and math for the page's preview and calculator, shared by the page and its script |
 | `src/scripts/unblocker.ts` | Tabs, preview switches and calculator for that page |
@@ -44,7 +44,8 @@ Edit `SITE_URL` in `src/site.config.ts`. The canonical URL, Open Graph and Twitt
 | `src/layouts/Base.astro` | `<head>`: meta tags, fonts, favicons, JSON-LD |
 | `amplify.yml` | Build spec for AWS Amplify |
 | `customHttp.yml` | Security and cache headers (CSP, HSTS) that Amplify applies to every response |
-| `scripts/make-icons.mjs` | Regenerates the favicon set and `og.png` (`npm run icons`, needs Google Chrome) |
+| `brand/` | The logo kit: logos, marks, favicons, social images. Source of truth for the brand |
+| `scripts/make-icons.mjs` | Rebuilds the favicon set, manifest icons and `og.png` from `brand/` (`npm run icons`, needs Google Chrome) |
 
 Fonts (Archivo and Source Sans 3) are self-hosted from `@fontsource`, Latin subset only. Fallback fonts are metric-matched, so the swap doesn't move the layout.
 

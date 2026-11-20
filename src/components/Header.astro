@@ -1,5 +1,5 @@
 ---
-import MountainMark from './MountainMark.astro';
+import logo from '../../brand/logo/gna-logo-horizontal.svg?url';
 import { company, unblocker } from '../site.config';
 
 interface Props {
@@ -21,8 +21,7 @@ const links = [
 <header class="site-header">
   <div class="container bar">
     <a class="brand" href={base ? '/' : '#top'}>
-      <span class="mark"><MountainMark /></span>
-      <span class="wordmark">{company.name}</span>
+      <img src={logo} alt={company.name} width="217" height="52" />
     </a>
     <nav aria-label="Main">
       <ul>
@@ -53,19 +52,14 @@ const links = [
   .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
     min-height: 44px;
-    text-decoration: none;
     color: var(--color-ink);
   }
 
-  .mark { color: var(--color-accent); flex: none; }
-
-  .wordmark {
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 19px;
-    letter-spacing: -0.01em;
+  .brand img {
+    display: block;
+    height: 52px;
+    width: auto;
   }
 
   ul {
