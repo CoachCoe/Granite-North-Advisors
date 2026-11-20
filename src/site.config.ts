@@ -5,6 +5,8 @@ export const SITE_URL = 'https://www.granitenorthadvisors.com';
 export const company = {
   name: 'Granite North Advisors',
   legalName: 'Granite North Advisors LLC',
+  // General contact. Use this anywhere a link isn't meant for one person.
+  email: 'info@granitenorthadvisors.com',
   street: '3 Deer Run Road',
   city: 'Bow',
   region: 'NH',

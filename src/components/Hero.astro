@@ -1,7 +1,5 @@
 ---
-import { principals } from '../site.config';
-
-const [john] = principals;
+import { company } from '../site.config';
 ---
 <section id="top" class="container hero" aria-labelledby="hero-title">
   <p class="pill">No cost if your practice has Rural Health Transformation money</p>
@@ -9,7 +7,7 @@ const [john] = principals;
   <p class="intro">We help small practices and rural hospitals in New Hampshire fix their tech, get paid for the work they already do, and stay safe from hackers. If you got Rural Health Transformation funding, it's free.</p>
   <div class="actions">
     <a class="btn btn-primary" href="#request">How to get started</a>
-    <a class="btn btn-secondary" href={`mailto:${john.email}`}>Just talk to us</a>
+    <a class="btn btn-secondary" href={`mailto:${company.email}`}>Just talk to us</a>
   </div>
   <p class="note">No IT department? That's most places we work. We'll figure it out with whoever's been handling it, even if that's you.</p>
 </section>

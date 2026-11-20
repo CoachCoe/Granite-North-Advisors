@@ -1,7 +1,5 @@
 ---
-import { fhcEmail, principals } from '../site.config';
-
-const [john] = principals;
+import { company, fhcEmail } from '../site.config';
 ---
 <section id="request" class="request" aria-labelledby="request-title">
   <div class="container section-pad">
@@ -25,7 +23,7 @@ const [john] = principals;
         <p class="item-text">Once the Foundation signs off, we start. The program pays us. You won't get a bill.</p>
       </li>
     </ol>
-    <p class="qualify">We work with rural health clinics, FQHCs, community health centers, independent practices and critical access hospitals. Not sure you qualify? <a href={`mailto:${john.email}`}>Email us</a> and we'll find out for you.</p>
+    <p class="qualify">We work with rural health clinics, FQHCs, community health centers, independent practices and critical access hospitals. Not sure you qualify? <a href={`mailto:${company.email}`}>Email us</a> and we'll find out for you.</p>
   </div>
 </section>
 
